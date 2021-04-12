@@ -131,25 +131,61 @@ fiveEx(61,100)
 fiveEx(51,42)
 fiveEx(71,100)
 
+
+
+console.log("-------------EX 6-------------------");
 /*
 6) 
 
 Create a function to create a new string of specified copies (positive number) of a given string.
 */
 
+function sixEx(string, copies) {
+let copiedString = '';
 
+while (copies > 0){
+   copiedString += ' '+string;
+   copies--;
 
+}
+ console.log(copiedString)
+}
+
+sixEx("this was copied ",5)
+
+console.log("-------------EX 7------------------");
 
 /*
-
 7)
 Create a function to display the city name if the string begins with "Los" or "New" otherwise return blank.
 */
+
+
+function sevenEx (cityName) {
+   let newCity = cityName.slice(0,3)
+//   console.log(newCity);
+    newCity = newCity.toLowerCase();
+
+if (newCity == 'los' || newCity == 'new'){
+      console.log(cityName);
+}else {
+    console.log('');
+}
+
+}
+sevenEx('los Angeles')
+sevenEx("New York")
+sevenEx("Boston")
+sevenEx("NEWARK")
+
+console.log("-------------EX 7------------------");
+
 
 /*
 8)
 Create a function to calculate the sum of three elements of a given array of integers of length 3.
 */
+
 
 /*
 
@@ -157,16 +193,60 @@ Create a function to calculate the sum of three elements of a given array of int
 Create a function to test whether an array of integers of length 2 contains 1 or a 3. 
 */
 
+// function nineEx(){
+//  myArray = [1,23,22,55,30,70,18,24];
+//  console.log(myArray);
+//  for( i)
+   
+
+ 
+//  console.log(myArray);
+
+// }
+
+// nineEx()
+
 /*
 
 10)
 
 Create a function to test whether an array of integers of length 2 does not contain 1 or a 3
 
+
+*/
+/*
 11)
 
 Create a function to find the longest string from a given array of strings.
 
+*/
+console.log("-------------EX 11------------------");
+
+function elevenEx() {
+    const myarray = [
+        'testing the string',
+        'testing the other string',
+        'testint the longest string og the the other two',
+        'shortest',
+        'meduimish string'
+      ];
+      
+      let theLength = 0;
+      let longest;
+      
+      for (let i = 0; i < myarray.length; i++) {
+        if (myarray[i].length > theLength) {
+          theLength = myarray[i].length;
+          longest = myarray[i];
+        }
+      }
+      
+      console.log(longest);
+}
+elevenEx();
+
+console.log("-------------EX 12------------------");
+/*
 12)
 
 Create a function to find the types of a given angle.
