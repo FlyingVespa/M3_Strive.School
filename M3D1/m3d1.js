@@ -84,9 +84,20 @@ function fourEx(w,s,d) {
         console.log(`${d} --> is the largest number`);
     }
 }
-fourEx(2,5,7)
-fourEx(8,5,6)
-fourEx(1,9,2)
+
+fourEx(2,5,7);
+fourEx(8,5,6);
+fourEx(1,9,2);
+
+function fourExB(array){
+   let myArray = [1,9,2,3,14,15,99];
+   console.log(Math.max(...myArray));
+}
+
+fourExB(1,9,2,3)
+
+
+
 
 console.log("-------------EX 5-------------------");
 /*
@@ -250,17 +261,43 @@ console.log("-------------EX 12------------------");
 12)
 
 Create a function to find the types of a given angle.
-
 Types of angles:
     Acute angle: An angle between 0 and 90 degrees.
     Right angle: An 90 degree angle.
     btuse angle: An angle between 90 and 180 degrees.
     Straight angle: A 180 degree angle.
+*/
+function twelveExA(a){
+    if (a > 0 && a < 90){
+        console.log("Acute Angle");
+    } else if (a === 90){
+        console.log( "Right ANgle");
+    } else if (a < 180 && a > 90) {
+        console.log("btuse Angle");
+    } else if ( a === 180){
+        console.log("Straight Angle");
+    }
+}
+twelveExA(15);
+twelveExA(90);
+twelveExA(122);
 
+console.log("-------------EX 13------------------");
+/*
 13)
 
 Create a function to find the index of the greatest element of a given array of integers
+*//*
+function thirteenEx(){
+const theArray13 = [22,44,55,5,77,45,23,99,2,1,78,88];
+   let arrayMax = Math.max(...theArray13)
+  console.log(arrayMax.indexOf(theArray13));
 
+}
+//map through array compare index with index
+thirteenEx();
+*/
+/*
 14)
 
 Create a function to get the largest even number from an array of integers.
