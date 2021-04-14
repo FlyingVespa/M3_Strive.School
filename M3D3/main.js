@@ -9,7 +9,7 @@ function loadImg() {
         //Select
         let row = document.querySelector(".album div.row");
         let container = document.querySelector("div.album div.container");
-        var body = document.querySelector(body);
+        var body = document.getElementsByTagName("body");
         
         //Create
         let newRow = document.createElement("div");
@@ -30,7 +30,7 @@ function loadImg() {
             card.classList.add("col-md-4");
             card.classList.add("bg-dark");
             card.setAttribute("id", `img${i}`);
-            card.innerHTML = `<div class="card mb-4 shadow-sm">
+            card.innerHTML = `<div class="card mb-3">
                 <img src="${body.images[i].url}"/>
                 <div class="card-body">
                 <p class="card-text">
