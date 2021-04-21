@@ -15,7 +15,7 @@ window.onload = () => {
           <div class="card" style="width: 18rem;">
           <img src="${book.img}" class="card-img-top" alt="...">
           <div class="card-body">
-          <h5 class="card-title">${book.title}</h5>
+          214577 <h5 class="card-title">${book.title}</h5>
           <h5 class="card-title">${book.price}</h5>
           <h5 class="card-title">${book.catagory}</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -28,6 +28,8 @@ window.onload = () => {
         row.appendChild(div);
         // row.innerHTML = div.outerHTML + " " + div.innerHTML;
       });
+
+      document.body.appendChild(row);
     });
 };
 
