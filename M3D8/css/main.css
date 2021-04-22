@@ -5,3 +5,6 @@
 body {
   background: #eeee;
 }
+.modal-background {
+  opacity: 1;
+}

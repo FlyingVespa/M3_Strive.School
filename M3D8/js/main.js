@@ -1,17 +1,28 @@
 "use strict";
+const params = new URLSearchParams(location.search);
+const id = params.get("id");
 
-const productName = document.getElementById("product-name").value;
-const productPrice = document.getElementById("product-price").value;
-const productImg = document.getElementById("product-img").value;
-const productBrand = document.getElementById("product-brand").value;
-const productDesc = document.getElementById("product-desc").value;
+const productName = document.getElementById("product-name");
+const productPrice = document.getElementById("product-price");
+const productImg = document.getElementById("product-img");
+const productBrand = document.getElementById("product-brand");
+const productDesc = document.getElementById("product-desc");
 const products = document.getElementById("products");
 const product = document.getElementById("product");
 
-window.onload = async () => {
+const endpoint = id
+  ? "https://striveschool-api.herokuapp.com/api/product/" + id
+  : "https://striveschool-api.herokuapp.com/api/product/";
+
+const url = "https://striveschool-api.herokuapp.com/api/product/";
+window.onload = () => {
+  displayProducts();
+};
+
+async function displayProducts() {
   console.log("written first, but printed when?");
 
-  const url = "https://striveschool-api.herokuapp.com/api/product/";
+  product.innerHTML = "";
   //   const products = document.getElementById("products");
   try {
     // prevents from total crashing - try
@@ -30,12 +41,15 @@ window.onload = async () => {
 
     if (json.length > 0) {
       json.forEach((item) => {
-        product.innerHTML = `
+        product.innerHTML += `
+        <div class="col-lg-3 col-md-4 col-sm-6" id="product">
         <div class="card" >
         <img
-            src=${item.url}
+            src=${item.imageUrl}
             class="card-img-top"
             alt="${item.name}"
+            height="200px"
+            background="fill"
         />
         <div class="card-body">
             <div class="text-center">
@@ -43,11 +57,13 @@ window.onload = async () => {
             <h6 id="item-brand">${item.brand}</h6>
             </div>
             <p class="card-text" id="item-desc">
-            ${item.desc}
+            ${item.description}
             </p>
             <h6 class="text-center" id="item-price">$${item.price}</h6>
-            <a href="#" class="btn btn-primary w-100">Add To Cart</a>
-        </div>
+            <a href="#" class="btn btn-primary w-100" onclick="deleteProduct();">Delete</a>
+            <a href="detail.html?id=${item._id}" class="btn btn-secondary w-100">Details</a>
+            </div>
+        </div>    
         </div>    `;
         products.appendChild(product);
       });
@@ -58,6 +74,19 @@ window.onload = async () => {
     console.log(error);
     console.log("this is written 3rd, printed 3rd?");
   }
+}
+
+async function postData(event) {
+  event.preventDefault();
+  const item = {
+    name: productName.value,
+    brand: productBrand.value,
+    price: productPrice.value,
+    description: productDesc.value,
+    imageUrl: productImg.value,
+  };
+  console.log(item);
+  // emptyFormAfterSubmit();
 
   try {
     let response = await fetch(url, {
@@ -79,19 +108,17 @@ window.onload = async () => {
     console.log(error);
     console.log("this is written 3rd, printed 3rd?");
   }
-};
 
-function postData(event) {
-  event.preventDefault();
-  const item = {
-    name: productName,
-    brand: productBrand,
-    price: productPrice,
-    desc: productDesc,
-    url: productImg,
-  };
-  console.log(item);
+  alert(`${item.name} Has been successfully submitted`);
+  displayProducts();
+
+  // function emptyFormAfterSubmit() {
+  //   Object.keys(item).forEach(function (key) {
+  //     delete object[key];
+  //   });
+  // }
 }
+
 // change textarea count
 var textarea = document.querySelector("textarea");
 const char = document.getElementById("char");
@@ -184,3 +211,36 @@ function handleError(e) {
 //     link.onload = function(e) {...};
 //     link.onerror = function(e) {...};
 //     document.body.appendChild(link);
+
+async function deleteProduct() {
+  // setLoading(true);
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgwMWI3NmIxZjBmYjAwMTVkOTE3OGQiLCJpYXQiOjE2MTkwMDgzNzQsImV4cCI6MTYyMDIxNzk3NH0.r1vvnZlH1xQehALnzQFe9IdtecDk_2GoyQKGc9tiYgA",
+      },
+    });
+
+    if (!response.ok) throw new Error("Something went wrong");
+
+    alert("Event deleted successfully");
+    location.assign("index.html");
+  } catch (error) {
+    console.log(error);
+    alert(error.message);
+  }
+
+  // setLoading(false);
+}
+
+// function setLoading(loading) {
+//   if (loading) {
+//     document.querySelector("#spinner").classList.remove("d-none");
+//   } else {
+//     document.querySelector("#spinner").classList.add("d-none");
+//   }
+// }
