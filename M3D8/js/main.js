@@ -4,7 +4,7 @@ const productName = document.getElementById("product-name").value;
 const productPrice = document.getElementById("product-price").value;
 const productImg = document.getElementById("product-img").value;
 const productBrand = document.getElementById("product-brand").value;
-// const productDesc = document.getElementById("product-desc").value;
+const productDesc = document.getElementById("product-desc").value;
 const products = document.getElementById("products");
 const product = document.getElementById("product");
 
@@ -13,7 +13,6 @@ window.onload = async () => {
 
   const url = "https://striveschool-api.herokuapp.com/api/product/";
   //   const products = document.getElementById("products");
-
   try {
     // prevents from total crashing - try
     // async & await method
@@ -59,19 +58,39 @@ window.onload = async () => {
     console.log(error);
     console.log("this is written 3rd, printed 3rd?");
   }
-};
-const handleSubmit = (e) => {
-  e.preventDefault();
-  console.log(e);
+  
+  let submitHandler= ((event) => {
+      event.preventDefault();
+      const item = {
+        name: productName,
+        brand: productBrand,
+        price: productPrice,
+        desc: productDesc,
+        url: productImg,
+      };
 
-  const item = {
-    name: productName,
-    brand: productBrand,
-    price: productPrice,
-    desc: productDesc,
-    url: productImg,
-  };
-  console.log(item);
+  try {
+      let response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgwMWI3NmIxZjBmYjAwMTVkOTE3OGQiLCJpYXQiOjE2MTkwMDgzNzQsImV4cCI6MTYyMDIxNzk3NH0.r1vvnZlH1xQehALnzQFe9IdtecDk_2GoyQKGc9tiYgA",
+        },
+        body: JSON.stringify(item),
+      });
+    }    catch (error) {
+        console.log(error);
+        console.log("this is written 3rd, printed 3rd?");
+    }
+    if (response.ok) {
+      alert("hunky dory");
+    } else {
+      console.log("somethign went wrong");
+    }
+})
+
+
 };
 
 // change textarea count

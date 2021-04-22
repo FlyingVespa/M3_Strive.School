@@ -157,7 +157,7 @@
       </div>
     </div>
     <!-- MODAL START -->
-    <form onsubmit="handleSubmit(item)">
+    <form onsubmit="postData(event)">
       <!-- product-name -->
       <div class="form-group row">
         <label for="product-name" class="col-sm-2 col-form-label"
@@ -208,12 +208,12 @@
       </div>
       <!-- desc -->
       <div class="form-group">
-        <label for="validationTextarea" class="form-label">Description</label>
+        <label for="product-desc" class="form-label">Description</label>
         <textarea
           type="textarea"
           class="form-control"
-          id="validationTextarea"
-          placeholder="Required example textarea"
+          id="product-desc"
+          value="Required example textarea"
           minlength="10"
           maxlength="150"
           required
