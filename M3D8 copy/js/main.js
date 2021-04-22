@@ -57,41 +57,41 @@ window.onload = async () => {
   } catch (error) {
     console.log(error);
     console.log("this is written 3rd, printed 3rd?");
-  }
-
-  try {
-    let response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgwMWI3NmIxZjBmYjAwMTVkOTE3OGQiLCJpYXQiOjE2MTkwMDgzNzQsImV4cCI6MTYyMDIxNzk3NH0.r1vvnZlH1xQehALnzQFe9IdtecDk_2GoyQKGc9tiYgA",
-      },
-      body: JSON.stringify(item),
-    });
-
-    if (response.ok) {
-      alert("hunky dory");
-    } else {
-      console.log("somethign went wrong");
+  };
+  
+  function postData (event) {
+      event.preventDefault();
+      const item = {
+        name: productName,
+        brand: productBrand,
+        price: productPrice,
+        desc: productDesc,
+        url: productImg,
+      };
     }
-  } catch (error) {
-    console.log(error);
-    console.log("this is written 3rd, printed 3rd?");
-  }
+  try {
+      let response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgwMWI3NmIxZjBmYjAwMTVkOTE3OGQiLCJpYXQiOjE2MTkwMDgzNzQsImV4cCI6MTYyMDIxNzk3NH0.r1vvnZlH1xQehALnzQFe9IdtecDk_2GoyQKGc9tiYgA",
+        },
+        body: JSON.stringify(item),
+      });
+      if (response.ok) {
+        alert("hunky dory");
+      } else {
+        console.log("somethign went wrong");
+      }
+        catch (error) {
+        console.log(error);
+        console.log("this is written 3rd, printed 3rd?");
+    }}
+
+
 };
 
-function postData(event) {
-  event.preventDefault();
-  const item = {
-    name: productName,
-    brand: productBrand,
-    price: productPrice,
-    desc: productDesc,
-    url: productImg,
-  };
-  console.log(item);
-}
 // change textarea count
 var textarea = document.querySelector("textarea");
 const char = document.getElementById("char");
@@ -134,13 +134,6 @@ textarea.addEventListener("input", function () {
   );
 })();
 
-function handleLoad(e) {
-  console.log("Loaded import: " + e.target.href);
-}
-function handleError(e) {
-  console.log("Error loading import: " + e.target.href);
-}
-
 //   productBrand.value = "";
 //   productDesc.value = "";
 //   productImg.value = "";
@@ -162,25 +155,3 @@ function handleError(e) {
 //     }
 //   }
 // }
-/// -------------------------------------New stuff m3d9
-// const params =new URLSearchParams(location.search)
-// const id = params.get("id")
-// const endpoint = "url"
-
-// window.onload = async => {
-
-//   document.querySelector("id").innerHTML += "" + id
-//   const response = await fetch(endpoint +id)
-//   const event = await response.json()
-//   console.log(event);
-
-// }
-
-// load dynamicly html element with template and link , not iframe as iframe is heavy
-// let link = document.createElement('link');
-//     link.rel = 'import';
-//     link.href = 'modal.html';
-//     link.setAttribute('async', '');
-//     link.onload = function(e) {...};
-//     link.onerror = function(e) {...};
-//     document.body.appendChild(link);

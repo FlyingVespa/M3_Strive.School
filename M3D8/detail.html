@@ -17,7 +17,7 @@
     />
     <link rel="stylesheet" href="./css/main.css" />
 
-    <title>BACKground, world!</title>
+    <title>DETAILS</title>
   </head>
 
   <body>
@@ -42,12 +42,15 @@
             style="--bs-scroll-height: 100px"
           >
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="./index.html"
-                >Home</a
-              >
+              <a class="nav-link" href="./index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./detail.html">Details</a>
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="./detail.html"
+                >Details</a
+              >
             </li>
             <!-- <li class="nav-item dropdown">
               <a
@@ -60,7 +63,7 @@
               >
                 Link
               </a>
-               <ul
+              <ul
                 class="dropdown-menu"
                 aria-labelledby="navbarScrollingDropdown"
               >
@@ -70,9 +73,9 @@
                 <li>
                   <a class="dropdown-item" href="#">Something else here</a>
                 </li>
-              </ul> 
-            </li> -->
-            <!-- <li class="nav-item">
+              </ul>
+            </li>
+            <li class="nav-item">
               <a
                 class="nav-link disabled"
                 href="#"
@@ -105,59 +108,6 @@
       </div>
     </nav>
     <!-- NAV END -->
-
-    <!-- Products START -->
-    <div class="container">
-      <!-- spinner -->
-      <div class="d-flex justify-content-center">
-        <div class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
-      <!-- spinner end -->
-      <h1>Products</h1>
-      <div class="products row" id="products">
-        <div class="col-lg-3 col-md-4 col-sm-6" id="product">
-          <div class="card">
-            <img
-              src="https://placeholder.pics/svg/300"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <div class="text-center">
-                <h5 class="card-title" id="item-name">Card title</h5>
-                <h6 id="item-brand">Apple</h6>
-              </div>
-
-              <p class="card-text" id="item-desc">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <h6 class="text-center" id="item-price">$200</h6>
-              <a href="#" class="btn btn-primary w-100">Add To Cart</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="card">
-            <img
-              src="https://placeholder.pics/svg/300"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- MODAL START -->
     <div
       class="modal fade"
@@ -381,6 +331,58 @@
       </div>
     </div>
     <!-- MODAL END -->
+    <!-- Products START -->
+    <div class="container">
+      <!-- spinner -->
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <!-- spinner end -->
+      <h1>Products</h1>
+      <div class="products row" id="products">
+        <div class="col-lg-3 col-md-4 col-sm-6" id="product">
+          <div class="card">
+            <img
+              src="https://placeholder.pics/svg/300"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <div class="text-center">
+                <h5 class="card-title" id="item-name">Card title</h5>
+                <h6 id="item-brand">Apple</h6>
+              </div>
+
+              <p class="card-text" id="item-desc">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <h6 class="text-center" id="item-price">$200</h6>
+              <a href="#" class="btn btn-primary w-100">Add To Cart</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <div class="card">
+            <img
+              src="https://placeholder.pics/svg/300"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
   <script></script>
   <script
