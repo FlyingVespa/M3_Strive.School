@@ -1,13 +1,10 @@
 "use strict";
-// fetch("https://striveschool-api.herokuapp.com/api/product/")
-//   .then((resp) => resp.json())
-//   .then((json) => console.log(json));
 
-const productName = document.getElementById("product-name");
-const productPrice = document.getElementById("product-price");
-const productImg = document.getElementById("product-img");
-const productBrand = document.getElementById("product-brand");
-const productDesc = document.getElementById("product-desc");
+const productName = document.getElementById("product-name").value;
+const productPrice = document.getElementById("product-price").value;
+const productImg = document.getElementById("product-img").value;
+const productBrand = document.getElementById("product-brand").value;
+const productDesc = document.getElementById("product-desc").value;
 
 window.onload = async () => {
   console.log("written first, but printed when?");
