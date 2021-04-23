@@ -1,8 +1,6 @@
-const myModal;
-const container = document.querySelector("container");
-
 window.onload = () => {
-  myModal.innerHTML = `
+  let container = document.querySelector(".container");
+  container.innerHTML = `
     <div
     class="modal"
     id="exampleModalCenter"
@@ -169,7 +167,7 @@ window.onload = () => {
                       type="text"
                       class="form-control"
                       id="product-img"
-                      placeholder="required"
+                   
                       minlength="3"
                     />
                     <div class="valid-feedback">Looks good!</div>
@@ -224,5 +222,6 @@ window.onload = () => {
       </div>
     </div>
   </div>`;
-  container.appendChild(myModal);
+
+  console.log("modal loaded");
 };

@@ -10,7 +10,7 @@ const productDesc = document.getElementById("product-desc");
 const products = document.getElementById("products");
 const product = document.getElementById("product");
 
-const endpoint = id
+let endpoint = id
   ? "https://striveschool-api.herokuapp.com/api/product/" + id
   : "https://striveschool-api.herokuapp.com/api/product/";
 
@@ -120,20 +120,20 @@ async function postData(event) {
 }
 
 // change textarea count
-var textarea = document.querySelector("textarea");
-const char = document.getElementById("char");
+// var textarea = document.querySelector("textarea");
+// const char = document.getElementById("char");
 
-textarea.addEventListener("input", function () {
-  var maxlength = this.getAttribute("maxlength");
-  var currentLength = this.value.length;
+// textarea.addEventListener("input", function () {
+//   var maxlength = this.getAttribute("maxlength");
+//   var currentLength = this.value.length;
 
-  if (currentLength >= maxlength) {
-    char.innerText = "Exceeded charatar lenght";
-    console.log("You have reached the maximum number of characters.");
-  } else {
-    char.innerText = maxlength - currentLength + " chars left";
-  }
-});
+//   if (currentLength >= maxlength) {
+//     char.innerText = "Exceeded charatar lenght";
+//     console.log("You have reached the maximum number of characters.");
+//   } else {
+//     char.innerText = maxlength - currentLength + " chars left";
+//   }
+// });
 
 (function () {
   "use strict";
