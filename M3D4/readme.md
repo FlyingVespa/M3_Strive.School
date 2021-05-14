@@ -5,10 +5,10 @@
 <hr/>
 #### Homework:
 
-You are creating the "shopping cart experience" for a Online Marketplace.
+_You are creating the "shopping cart experience" for a Online Marketplace.
 You have the list of the available books from the current API:
 https://striveschool-api.herokuapp.com/books
-What you have to do is:
+What you have to do is:_
 
 - [ ] **0.**
       Get all the products from the API using a fetch
