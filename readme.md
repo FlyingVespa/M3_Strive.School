@@ -49,6 +49,15 @@
 
 ### [M3D4](https://github.com/FlyingVespa/M3_Strive.School/tree/main/M3D4)
 
+__Create a shopping card experience (Bookstore)__
+
+- Fetch API
+- Add / Delete 
+- Filter
+- Clear Entire list
+- Redirecting New page
+- Fetch additional details
+
 <hr>
 
 ### [M3D5]()
