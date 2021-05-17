@@ -49,14 +49,30 @@
 
 ### [M3D4](https://github.com/FlyingVespa/M3_Strive.School/tree/main/M3D4)
 
+__Create a shopping card experience (Bookstore)__
+
+- Fetch API
+- Add / Delete 
+- Filter
+- Clear Entire list
+- Redirecting New page
+- Fetch additional details
+
 <hr>
 
 ### [M3D5]()
 
+__Colab Day, work together with other Strive Students to build a project__
+
+Project - Netflix Clone
 <hr>
 
 ### [M3D6]()
 
+No homework, just reviewing videos:
+
+- Servers, networks how they work + terminoligy
+- Asynchronous JS 
 <hr>
 
 ### [M3D7]()
