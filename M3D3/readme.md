@@ -1,4 +1,4 @@
-## Module 3 Day 1
+## Module 3 Day 3
 
 ### Advance Javascript
 

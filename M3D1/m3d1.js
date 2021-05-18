@@ -155,12 +155,16 @@ sevenEx("New York");
 sevenEx("Boston");
 sevenEx("NEWARK");
 
-console.log("-------------EX 7------------------");
+console.log("-------------EX 8------------------");
 
 // 8)Create a function to calculate the sum of three elements of a given array of integers of length 3.
+
+let array = [2, 2, 3, 4];
+const eightEx = array.reduce((a, b) => a + b, 0);
+console.log(eightEx);
 // explain reduce function?
 
-console.log("-------------EX 8------------------");
+console.log("-------------EX 9------------------");
 
 // 9)Create a function to test whether an array of integers of length 2 contains 1 or a 3.
 function nineEx(arr) {
@@ -241,13 +245,13 @@ console.log("-------------EX 13------------------");
 
 // 13) Create a function to find the index of the greatest element of a given array of integers
 
-// function thirteenEx() {
-//   const theArray13 = [22, 44, 55, 5, 77, 45, 23, 99, 2, 1, 78, 88];
-//   let arrayMax = Math.max(...theArray13);
-//   console.log(arrayMax.indexOf(theArray13));
-// }
-// //map through array compare index with index
-// thirteenEx();
+function thirteenEx(array13) {
+  let arrayMax = Math.max(...array13);
+  console.log(arrayMax);
+  return arrayMax;
+}
+//map through array compare index with index
+thirteenEx([1, 2, 4, 5, 6, 7, 8, 9]);
 
 // 14) Create a function to get the largest even number from an array of integers.
 
