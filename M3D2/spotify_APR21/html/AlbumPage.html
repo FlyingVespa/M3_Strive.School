@@ -12,15 +12,12 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
     integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="./css/navbar.css" />
-  <link rel="stylesheet" href="./css/login.css" />
-
-  <title>Albumpage | Spotify</title>
+  <link rel="stylesheet" href="../css/login.css" />
+  <title>AlbumPage | Spotify</title>
 </head>
 
-<body class="body-n">
-  <iframe src="./navbar.html" width="100%" height="100%"
-    onload="this.before((this.contentDocument.body));this.remove()"></iframe>
+<body class="body-AlbumPage">
+ <navbar></navbar>
   <div class="container-fluid m-0 p-0">
     <div class="row mt-5">
       <div class="col-lg-6 col-md-6 album-n">
@@ -103,7 +100,7 @@
       </div>
     </div>
   </div>
-  <script src="./script.js"></script>
+  <script src="../script.js"></script>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -112,5 +109,44 @@
     integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
     crossorigin="anonymous"></script>
 </body>
+<script>
+         const getData = input => {
+                const apiUrl = "https://striveschool-api.herokuapp.com/api/deezer/search?q="
+                fetch(apiUrl + input, {
+                    method: "GET",
+                    headers: {
+                        "x-rapidapi-key": "f63820576cmshd99ae1c2eec0cfap1f5daajsne468be2e59ef",
+                        "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com"
+                    }
+                })
+                    .then(response => response.json())
+                    .then(objects => {
+                        const parent = document.querySelector("#parent")
+                        for (const item of objects.data) {
+                            const container = document.createElement("div")
+                            container.classList.add("col")
+                            //container.classList.add("")
+                            const image = document.createElement("img")
+                            image.src = item.album.cover
+                            image.width = 120
+                            image.height = 120
+                            image.classList.add("img")
+                            container.appendChild(image)
+                            parent.appendChild(container)
+                        }
+                    })
+                    .catch(err => console.error("ERROR " + err))
+            }
+
+            const getDataRepeated = (input, repeats) => {
+                for (let i = 0; i < repeats; i++) {
+                    getData(input)
+                }
+            }
+
+            const someFunc = () => {
+                console.log("Hi mom!")
+            }
+</script>
 
 </html>
