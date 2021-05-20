@@ -15,7 +15,7 @@ window.onload = () => {
     .then((res) => res.json())
     .then((books) => {
       bookList = books;
-      console.log(bookList);
+      // console.log(bookList);
       createBookList(bookList);
     })
     .then(() => removeContent())
@@ -59,13 +59,15 @@ const addToCart = () => {
   const myCartRow = document.querySelector(".cartRow");
 
   const cartBtn = document.querySelectorAll(".cartBtn");
-  cartBtn.forEach((c) => {
+  cartBtn.forEach((c, i) => {
     c.addEventListener("click", (e) => {
       console.log("hello");
-      cartList.push(bookList);
-      // cartList.push(e.target.closest(".card"));
-      console.log(cartList);
+      // cartList.push(bookList[i]);
+      cartList.push(e.target.closest(".card"));
       e.target.closest(".card").classList.toggle("selectedCard");
+      // e.target.closest(".card").push(cartList);
+
+      console.log(cartList);
       myCartRow.innerHTML += `
           <div class="col my-2 ">
           <div class="card h-100 " onclick="selectBook()" >
@@ -74,6 +76,7 @@ const addToCart = () => {
               <div class="card-body">
                 <h5 class="card-title">${cartList.title}</h5>
                 <h5 class="card-title">$ ${cartList.price}</h5>
+                <h5 class="card-title">$ ${cartList.asin}</h5>
                 <button class="btn btn-primary cartBtn">ADD TO CART</button>
                 <button class="btn btn-danger skipBtn" id=${cartList.asin}>SKIP</button>
               </div>
@@ -84,7 +87,6 @@ const addToCart = () => {
       // cartList.push(e.target.parentNode);
     });
   });
-  console.log(cartBtn);
 };
 
 const removeContent = () => {
@@ -94,23 +96,19 @@ const removeContent = () => {
       e.target.parentNode.parentNode.remove();
     });
   });
-
-  // document.body.appendChild(row);
 };
-const searchBooks = (e) => {
-  e.preventDefault();
-
+const searchBooks = () => {
   const search = searchInput.value;
   if (search.length >= 3) {
-    cartList = books.filter((book) =>
+    bookList = bookList.filter((book) =>
       book.title.toLowerCase().includes(search.toLowerCase())
     );
     myRow.innerHTML = "";
-    createList(cartList);
+    createBookList(cartList);
     cartList = [];
   } else if (search.length === 0) {
     myRow.innerHTML = "";
-    createList(books);
+    createBookList(books);
   }
 };
 
