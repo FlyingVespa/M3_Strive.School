@@ -7,21 +7,10 @@ let cartList = [];
 let bookList = [];
 
 const myBook = document.querySelector(".card");
-const myRow = document.querySelector("div>.row:nth-child(1)");
+const myRow = document.querySelector(".myRow");
 const searchInput = document.querySelector("input");
-const myCartRow = document.querySelector("body > div:nth-child(3)");
 
 window.onload = () => {
-  // const createLayout = () => {
-  //   const container = document.createElement("div");
-  //   container.classList.add("container");
-  //   const row = document.createElement("div");
-  //   row.classList.add("row");
-  //   row.classList.add("no-gutter");
-  //   document.body.appendChild(container);
-  //   container.appendChild(row);
-  // };
-
   fetch("https://striveschool-api.herokuapp.com/books")
     .then((res) => res.json())
     .then((books) => {
@@ -36,7 +25,7 @@ const createBookList = (books) => {
   books.forEach((book, i) => {
     myRow.innerHTML += `
       <div class="col-md-3 my-2 ">
-      <div class="card h-100" style="width: 18rem;">
+      <div class="card h-100" >
       <span class="badge">${book.category}</span>
           <img src="${book.img}" class="card-img-top" alt="...">
           <div class="card-body">
@@ -68,24 +57,27 @@ const createBookList = (books) => {
 // };
 
 const addToCart = () => {
+  const myCartRow = document.querySelector(".cartRow");
+
   const cartBtn = document.querySelectorAll(".cartBtn");
   cartBtn.forEach((c) => {
     c.addEventListener("click", (e) => {
       console.log("hello");
-      cartList.push(e.target.parentNode.parentNode);
+      cartList.push(bookList[0]);
+      // cartList.push(e.target.closest(".card"));
       console.log(cartList);
-
-      cartList.innerHTML += `
+      // element.classList.toggle("selectedCard");
+      myCartRow.innerHTML += `
           <div class="col-md-3 my-2 ">
-          <div class="card h-100" style="width: 18rem;">
-          <span class="badge">${bookList.category}</span>
-              <img src="${bookList.img}" class="card-img-top" alt="...">
+          <div class="card h-100" onclick="selectBook()" >
+          <span class="badge">${cartList.category}</span>
+              <img src="${cartList.img}" class="card-img-top" alt="...">
               <div class="card-body">
-                214577 <h5 class="card-title">${bookList.title}</h5>
-                <h5 class="card-title">${bookList.price}</h5>
+                214577 <h5 class="card-title">${cartList.title}</h5>
+                <h5 class="card-title">${cartList.price}</h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 <button class="btn btn-primary cartBtn">ADD TO CART</button>
-                <button class="btn btn-danger skipBtn" id=${bookList.asin}>SKIP</button>
+                <button class="btn btn-danger skipBtn" id=${cartList.asin}>SKIP</button>
               </div>
             </div>
           </div>
@@ -127,6 +119,12 @@ const searchBooks = (e) => {
 const emptyCart = () => {
   cartList.innerHTML = "";
 };
+
+function selectBook(e) {
+  const element = e.currentTarget;
+  element.classList.toggle("selectedCard");
+}
+
 // const searchBar = `
 // <input class = "form-control type="text" width=400 required >
 // <input type="button" value="Search">
