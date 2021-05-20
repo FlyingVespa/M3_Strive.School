@@ -7,11 +7,11 @@
             https://striveschool-api.herokuapp.com/books
             What you have to do is:
             ✅0) Get all the products from the API using a fetch
-            1) Display the list of items available on the page using template literals `` and .forEach
-            2) Add a "add to cart button"
+            ✅1) Display the list of items available on the page using template literals `` and .forEach
+            ✅2) Add a "add to cart button"
             3) When the button is pressed, change the style of the item and add it to another list
-            4) Add "skip" button next to each item
-            5) When pressed, the button should remove from the page the item not interesting from the user
+            ✅4) Add "skip" button next to each item
+            ✅5) When pressed, the button should remove from the page the item not interesting from the user
             6) Add a "search bar". When the user types more than 3 chars, you should filter the content of the page to show only the items with a matching name (hint: use .filter method)
             7) Allow the user to delete items from the cart list
             
@@ -27,10 +27,37 @@
       integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <input type="button" value="" />
+  <style></style>
+
+  <div
+    class="
+      jumbotron jumbotron-fluid
+      bg-light
+      mb-5
+      d-flex
+      justify-content-center
+    "
+  >
+    <div class="container">
+      <h1 class="text-center">Book Store</h1>
+      <div class="row">
+        <div class="col mb-5">
+          <div class="input-group">
+            <input type="button" value="witcher" class="form-control" />
+            <button class="btn btn-dark" onclick="searchBooks()">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container"><div class="row shoppinglist"></div></div>
 
   <body>
+    <div class="container"><div class="row"></div></div>
+    <div class="container"><div class="row"></div></div>
+
     <script src="main.js"></script>
     <!-- JavaScript Bundle with Popper -->
     <script

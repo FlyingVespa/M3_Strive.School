@@ -1,38 +1,121 @@
+// Add border?
+// Append Row to container
+// Not removing
+// Page keeps scrolling top
+// object assign or push?
+let cartList = [];
+let bookList = [];
+
+const myBook = document.querySelector(".card");
+const myRow = document.querySelector("div>.row:nth-child(1)");
+const searchInput = document.querySelector("input");
+const myCartRow = document.querySelector("body > div:nth-child(3)");
+
 window.onload = () => {
+  // const createLayout = () => {
+  //   const container = document.createElement("div");
+  //   container.classList.add("container");
+  //   const row = document.createElement("div");
+  //   row.classList.add("row");
+  //   row.classList.add("no-gutter");
+  //   document.body.appendChild(container);
+  //   container.appendChild(row);
+  // };
+
   fetch("https://striveschool-api.herokuapp.com/books")
     .then((res) => res.json())
     .then((books) => {
-      console.log(books);
-
-      const row = document.createElement("div");
-      row.classList.add("row");
-      row.classList.add("no-gutter");
-
-      books.forEach((book) => {
-        let div = document.createElement("div");
-        div.classList.add("col-md-4");
-        div.innerHTML = `
-          <div class="card" style="width: 18rem;">
+      bookList = books;
+      console.log(bookList);
+      createBookList(bookList);
+    })
+    .then(() => removeContent())
+    .then(() => addToCart());
+};
+const createBookList = (books) => {
+  books.forEach((book, i) => {
+    myRow.innerHTML += `
+      <div class="col-md-3 my-2">
+        <div class="card" style="width: 18rem;">
           <img src="${book.img}" class="card-img-top" alt="...">
           <div class="card-body">
-          214577 <h5 class="card-title">${book.title}</h5>
-          <h5 class="card-title">${book.price}</h5>
-          <h5 class="card-title">${book.catagory}</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-success" id="cartBtn">ADD TO CART</a>
-          <a href="#" class="btn btn-primary" id= "skipBtn">Skip</a>
+            214577 <h5 class="card-title">${book.title}</h5>
+            <h5 class="card-title">${book.price}</h5>
+            <h5 class="card-title">${book.category}</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <button class="btn btn-success cartBtn">ADD TO CART</button>
+            <button class="btn btn-primary skipBtn" id=${book.asin}>Skip</button>
           </div>
-          </div>
-         
-          `;
-        row.appendChild(div);
-        // row.innerHTML = div.outerHTML + " " + div.innerHTML;
-      });
+        </div>
+      </div>
+      `;
+  });
+  // const removeBook = (e) => {
+  //   // const skipBtn = document.querySelectorAll("#skipBtn")[i];
+  //   // skipBtn.addEventListener("click", (e) => {
 
-      document.body.appendChild(row);
+  //   console.log(e.target);
+  //   // });
+  // };
+};
+// const addToList = () => {
+//   const cartBtn = document.querySelector(".cartBtn");
+//   cartBtn.addEventListener("click", () => {
+//     myBook.assign(cartList);
+//     myBook.toggle("#test");
+//   });
+// };
+
+// const removeBook = (e) => {
+//   // const skipBtn = document.querySelectorAll("#skipBtn")[i];
+//   // skipBtn.addEventListener("click", (e) => {
+
+//   console.log(e.target.parentNode);
+//   // });
+// };
+
+const addToCart = () => {
+  const cartBtn = document.querySelectorAll(".cartBtn");
+  cartBtn.forEach((c) => {
+    c.addEventListener("click", (e) => {
+      console.log("hello");
+
+      // cartList.push(e.target.parentNode);
     });
+  });
+  console.log(cartBtn);
 };
 
+const removeContent = () => {
+  const skipBtn = document.querySelectorAll(".skipBtn");
+  skipBtn.forEach((b) => {
+    b.addEventListener("click", (e) => {
+      e.target.parentNode.parentNode.remove();
+    });
+  });
+
+  // document.body.appendChild(row);
+};
+const searchBooks = (e) => {
+  e.preventDefault();
+
+  const search = searchInput.value;
+  if (search.length >= 3) {
+    cartList = books.filter((book) =>
+      book.title.toLowerCase().includes(search.toLowerCase())
+    );
+    myRow.innerHTML = "";
+    createList(cartList);
+    cartList = [];
+  } else if (search.length === 0) {
+    myRow.innerHTML = "";
+    createList(books);
+  }
+};
+
+const emptyCart = () => {
+  cartList.innerHTML = "";
+};
 // const searchBar = `
 // <input class = "form-control type="text" width=400 required >
 // <input type="button" value="Search">

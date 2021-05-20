@@ -1,0 +1,15 @@
+#test {
+  border: solid red 4px !important;
+}
+
+.row {
+  border: solid blue 2px;
+}
+
+.container {
+  border: solid green 5px;
+}
+
+.card img {
+  height: 200px;
+}
