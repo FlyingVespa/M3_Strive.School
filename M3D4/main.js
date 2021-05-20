@@ -35,28 +35,21 @@ window.onload = () => {
 const createBookList = (books) => {
   books.forEach((book, i) => {
     myRow.innerHTML += `
-      <div class="col-md-3 my-2">
-        <div class="card" style="width: 18rem;">
+      <div class="col-md-3 my-2 ">
+      <div class="card h-100" style="width: 18rem;">
+      <span class="badge">${book.category}</span>
           <img src="${book.img}" class="card-img-top" alt="...">
           <div class="card-body">
             214577 <h5 class="card-title">${book.title}</h5>
             <h5 class="card-title">${book.price}</h5>
-            <h5 class="card-title">${book.category}</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <button class="btn btn-success cartBtn">ADD TO CART</button>
-            <button class="btn btn-primary skipBtn" id=${book.asin}>Skip</button>
+            <button class="btn btn-primary cartBtn">ADD TO CART</button>
+            <button class="btn btn-danger skipBtn" id=${book.asin}>SKIP</button>
           </div>
         </div>
       </div>
       `;
   });
-  // const removeBook = (e) => {
-  //   // const skipBtn = document.querySelectorAll("#skipBtn")[i];
-  //   // skipBtn.addEventListener("click", (e) => {
-
-  //   console.log(e.target);
-  //   // });
-  // };
 };
 // const addToList = () => {
 //   const cartBtn = document.querySelector(".cartBtn");
@@ -79,6 +72,24 @@ const addToCart = () => {
   cartBtn.forEach((c) => {
     c.addEventListener("click", (e) => {
       console.log("hello");
+      cartList.push(e.target.parentNode.parentNode);
+      console.log(cartList);
+
+      cartList.innerHTML += `
+          <div class="col-md-3 my-2 ">
+          <div class="card h-100" style="width: 18rem;">
+          <span class="badge">${bookList.category}</span>
+              <img src="${bookList.img}" class="card-img-top" alt="...">
+              <div class="card-body">
+                214577 <h5 class="card-title">${bookList.title}</h5>
+                <h5 class="card-title">${bookList.price}</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <button class="btn btn-primary cartBtn">ADD TO CART</button>
+                <button class="btn btn-danger skipBtn" id=${bookList.asin}>SKIP</button>
+              </div>
+            </div>
+          </div>
+          `;
 
       // cartList.push(e.target.parentNode);
     });
