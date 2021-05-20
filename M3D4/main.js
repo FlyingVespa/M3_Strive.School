@@ -24,14 +24,13 @@ window.onload = () => {
 const createBookList = (books) => {
   books.forEach((book, i) => {
     myRow.innerHTML += `
-      <div class="col-md-3 my-2 ">
-      <div class="card h-100" >
+      <div class="col-md-4 my-2 ">
+      <div class="card h-100">
       <span class="badge">${book.category}</span>
-          <img src="${book.img}" class="card-img-top" alt="...">
+          <img src="${book.img}" class="card-img-top" alt="${book.asin} image">
           <div class="card-body">
-            214577 <h5 class="card-title">${book.title}</h5>
-            <h5 class="card-title">${book.price}</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="card-title">${book.title}</h5>
+            <h5 class="card-title">$ ${book.price}</h5>
             <button class="btn btn-primary cartBtn">ADD TO CART</button>
             <button class="btn btn-danger skipBtn" id=${book.asin}>SKIP</button>
           </div>
@@ -63,19 +62,18 @@ const addToCart = () => {
   cartBtn.forEach((c) => {
     c.addEventListener("click", (e) => {
       console.log("hello");
-      cartList.push(bookList[0]);
+      cartList.push(bookList);
       // cartList.push(e.target.closest(".card"));
       console.log(cartList);
-      // element.classList.toggle("selectedCard");
+      e.target.closest(".card").classList.toggle("selectedCard");
       myCartRow.innerHTML += `
-          <div class="col-md-3 my-2 ">
-          <div class="card h-100" onclick="selectBook()" >
+          <div class="col my-2 ">
+          <div class="card h-100 " onclick="selectBook()" >
           <span class="badge">${cartList.category}</span>
               <img src="${cartList.img}" class="card-img-top" alt="...">
               <div class="card-body">
-                214577 <h5 class="card-title">${cartList.title}</h5>
-                <h5 class="card-title">${cartList.price}</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <h5 class="card-title">${cartList.title}</h5>
+                <h5 class="card-title">$ ${cartList.price}</h5>
                 <button class="btn btn-primary cartBtn">ADD TO CART</button>
                 <button class="btn btn-danger skipBtn" id=${cartList.asin}>SKIP</button>
               </div>
@@ -117,7 +115,8 @@ const searchBooks = (e) => {
 };
 
 const emptyCart = () => {
-  cartList.innerHTML = "";
+  const card = document.querySelector(".card");
+  card.remove();
 };
 
 function selectBook(e) {
