@@ -1,0 +1,31 @@
+a {
+    text-decoration: inherit;
+    color: black
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+
+/* .userRow {
+    height: 85vh;
+    overflow: auto
+} */
+
+#mapsection {
+    height: 88vh;
+}
+
+#map {
+    height: 85vh;
+}
+
+@media screen and (max-width: 576px) {
+    #mapsection {
+        height: 92vh;
+    }
+    #map {
+        height: 92vh;
+    }
+}
