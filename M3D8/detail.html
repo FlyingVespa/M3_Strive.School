@@ -129,25 +129,25 @@
   <script src="./js/main.js"></script>
   <script src="./js/modal.js"></script>
   <script>
-    endpoint = "https://striveschool-api.herokuapp.com/api/product/";
+    // endpoint = "https://striveschool-api.herokuapp.com/api/product/";
 
-    window.onload = async () => {
-      // document.querySelector('h1').innerHTML += " " + id
+    // window.onload = async () => {
+    //   // document.querySelector('h1').innerHTML += " " + id
 
-      const response = await fetch(endpoint + id);
-      const event = await response.json();
+    //   const response = await fetch(endpoint + id);
+    //   const event = await response.json();
 
-      console.log(item);
-      displayEvent(item);
-    };
+    //   console.log(item);
+    //   displayEvent(item);
+    // };
 
-    function displayProduct(item) {
-      productName.innerHTML = item.name;
-      productPrice.innerHTML = item.price;
-      productImg.innerHTML = item.IMGurl;
-      productBrand.innerHTML = item.brand;
-      productDesc.innerHTML = item.description;
-    }
+    // function displayProduct(item) {
+    //   productName.innerHTML = item.name;
+    //   productPrice.innerHTML = item.price;
+    //   productImg.innerHTML = item.IMGurl;
+    //   productBrand.innerHTML = item.brand;
+    //   productDesc.innerHTML = item.description;
+    // }
   </script>
   <script
     src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

@@ -1,6 +1,6 @@
-window.onload = () => {
-  let container = document.querySelector(".container");
-  container.innerHTML = `
+// window.onload = () => {
+let container = document.querySelector(".container");
+container.innerHTML = `
     <div
     class="modal"
     id="exampleModalCenter"
@@ -38,7 +38,7 @@ window.onload = () => {
                   id="product-name"
                   placeholder="required"
                   minlength="3"
-                  required
+                  value="test1"
                 />
                 <div class="valid-feedback">Looks good!</div>
               </div>
@@ -54,7 +54,7 @@ window.onload = () => {
                   id="product-brand"
                   placeholder="required"
                   minlength="2"
-                  required
+                  value="test2"
                 />
                 <div class="valid-feedback">Looks good!</div>
               </div>
@@ -72,7 +72,8 @@ window.onload = () => {
                   class="form-control"
                   id="product-price"
                   placeholder="$"
-                  required
+                  value= "20"
+                
                 />
               </div>
             </div>
@@ -86,6 +87,7 @@ window.onload = () => {
                 value="Required example textarea"
                 minlength="10"
                 maxlength="150"
+                value= " Please enter a description with minimun of 10 characters."
                 required
               ></textarea>
               <div id="char" class="float-right">0</div>
@@ -167,7 +169,7 @@ window.onload = () => {
                       type="text"
                       class="form-control"
                       id="product-img"
-                   
+
                       minlength="3"
                     />
                     <div class="valid-feedback">Looks good!</div>
@@ -222,6 +224,4 @@ window.onload = () => {
       </div>
     </div>
   </div>`;
-
-  console.log("modal loaded");
-};
+// };

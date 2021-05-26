@@ -10,18 +10,17 @@ const productDesc = document.getElementById("product-desc");
 const products = document.getElementById("products");
 const product = document.getElementById("product");
 
-let endpoint = id
-  ? "https://striveschool-api.herokuapp.com/api/product/" + id
-  : "https://striveschool-api.herokuapp.com/api/product/";
+// let endpoint = id
+//   ? "https://striveschool-api.herokuapp.com/api/product/" + id
+//   : "https://striveschool-api.herokuapp.com/api/product/";
 
 const url = "https://striveschool-api.herokuapp.com/api/product/";
-window.onload = () => {
-  displayProducts();
-};
+
+const bearerToken =
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGFlNDAyNGNlYWY0ODAwMTVjOTE4NmYiLCJpYXQiOjE2MjIwMzM3OTIsImV4cCI6MTYyMzI0MzM5Mn0.N7an5gYm4hCXi-yxpt6ZfgszaM_66fkx3Ws0xd1zucc";
 
 async function displayProducts() {
-  console.log("written first, but printed when?");
-
+  // console.log("written first, but printed when?");
   product.innerHTML = "";
   //   const products = document.getElementById("products");
   try {
@@ -30,15 +29,13 @@ async function displayProducts() {
     let resp = await fetch(url, {
       method: "GET",
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgwMWI3NmIxZjBmYjAwMTVkOTE3OGQiLCJpYXQiOjE2MTkwMDgzNzQsImV4cCI6MTYyMDIxNzk3NH0.r1vvnZlH1xQehALnzQFe9IdtecDk_2GoyQKGc9tiYgA",
+        Authorization: bearerToken,
       },
     });
-    console.log("this is written second, printed 2nd?");
+
     console.log(resp);
     let json = await resp.json();
-    console.log(json); // where is my json data :( ????????
-
+    console.log(json);
     if (json.length > 0) {
       json.forEach((item) => {
         product.innerHTML += `
@@ -66,6 +63,7 @@ async function displayProducts() {
         </div>    
         </div>    `;
         products.appendChild(product);
+        console.log(products);
       });
     } else {
       products.innerHTML = "<h1>No products were added to page</h1>";
@@ -93,8 +91,7 @@ async function postData(event) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgwMWI3NmIxZjBmYjAwMTVkOTE3OGQiLCJpYXQiOjE2MTkwMDgzNzQsImV4cCI6MTYyMDIxNzk3NH0.r1vvnZlH1xQehALnzQFe9IdtecDk_2GoyQKGc9tiYgA",
+        Authorization: bearerToken,
       },
       body: JSON.stringify(item),
     });
@@ -135,31 +132,31 @@ async function postData(event) {
 //   }
 // });
 
-(function () {
-  "use strict";
-  window.addEventListener(
-    "load",
-    function () {
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      var forms = document.getElementsByClassName("needs-validation");
-      // Loop over them and prevent submission
-      var validation = Array.prototype.filter.call(forms, function (form) {
-        form.addEventListener(
-          "submit",
-          function (event) {
-            if (form.checkValidity() === false) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-            form.classList.add("was-validated");
-          },
-          false
-        );
-      });
-    },
-    false
-  );
-})();
+// (function () {
+//   "use strict";
+//   window.addEventListener(
+//     "load",
+//     function () {
+//       // Fetch all the forms we want to apply custom Bootstrap validation styles to
+//       var forms = document.getElementsByClassName("needs-validation");
+//       // Loop over them and prevent submission
+//       var validation = Array.prototype.filter.call(forms, function (form) {
+//         form.addEventListener(
+//           "submit",
+//           function (event) {
+//             if (form.checkValidity() === false) {
+//               event.preventDefault();
+//               event.stopPropagation();
+//             }
+//             form.classList.add("was-validated");
+//           },
+//           false
+//         );
+//       });
+//     },
+//     false
+//   );
+// })();
 
 function handleLoad(e) {
   console.log("Loaded import: " + e.target.href);
@@ -212,30 +209,28 @@ function handleError(e) {
 //     link.onerror = function(e) {...};
 //     document.body.appendChild(link);
 
-async function deleteProduct() {
-  // setLoading(true);
+// async function deleteProduct() {
 
-  try {
-    const response = await fetch(endpoint, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgwMWI3NmIxZjBmYjAwMTVkOTE3OGQiLCJpYXQiOjE2MTkwMDgzNzQsImV4cCI6MTYyMDIxNzk3NH0.r1vvnZlH1xQehALnzQFe9IdtecDk_2GoyQKGc9tiYgA",
-      },
-    });
+//   try {
+//     const response = await fetch(endpoint, {
+//       method: "DELETE",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization:
+//         BearerToken      },
+//     });
 
-    if (!response.ok) throw new Error("Something went wrong");
+//     if (!response.ok) throw new Error("Something went wrong");
 
-    alert("Event deleted successfully");
-    location.assign("index.html");
-  } catch (error) {
-    console.log(error);
-    alert(error.message);
-  }
+//     alert("Event deleted successfully");
+//     location.assign("index.html");
+//   } catch (error) {
+//     console.log(error);
+//     alert(error.message);
+//   }
 
-  // setLoading(false);
-}
+//   // setLoading(false);
+// }
 
 // function setLoading(loading) {
 //   if (loading) {
@@ -244,3 +239,4 @@ async function deleteProduct() {
 //     document.querySelector("#spinner").classList.add("d-none");
 //   }
 // }
+window.onload = () => displayProducts();
