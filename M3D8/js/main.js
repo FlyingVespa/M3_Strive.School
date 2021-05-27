@@ -1,6 +1,6 @@
 "use strict";
-const params = new URLSearchParams(location.search);
-const id = params.get("id");
+const getLocation = new URLSearchParams(window.location.search);
+const id = getLocation.get("id");
 
 const productName = document.getElementById("product-name");
 const productPrice = document.getElementById("product-price");
@@ -9,23 +9,22 @@ const productBrand = document.getElementById("product-brand");
 const productDesc = document.getElementById("product-desc");
 const products = document.getElementById("products");
 const product = document.getElementById("product");
-
-// let endpoint = id
-//   ? "https://striveschool-api.herokuapp.com/api/product/" + id
-//   : "https://striveschool-api.herokuapp.com/api/product/";
+const displayDetailsDiv = document.querySelector(".display-details");
 
 const url = "https://striveschool-api.herokuapp.com/api/product/";
+let endpoint = id ? url + id : url;
 
 const bearerToken =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGFlNDAyNGNlYWY0ODAwMTVjOTE4NmYiLCJpYXQiOjE2MjIwMzM3OTIsImV4cCI6MTYyMzI0MzM5Mn0.N7an5gYm4hCXi-yxpt6ZfgszaM_66fkx3Ws0xd1zucc";
+const headers = new Headers({
+  "Content-Type": "application/json",
+  Authorization: bearerToken,
+});
 
+/*---------------GET ---------------------*/
 async function displayProducts() {
-  // console.log("written first, but printed when?");
   product.innerHTML = "";
-  //   const products = document.getElementById("products");
   try {
-    // prevents from total crashing - try
-    // async & await method
     let resp = await fetch(url, {
       method: "GET",
       headers: {
@@ -33,46 +32,42 @@ async function displayProducts() {
       },
     });
 
-    console.log(resp);
     let json = await resp.json();
-    console.log(json);
+
     if (json.length > 0) {
       json.forEach((item) => {
         product.innerHTML += `
         <div class="col-lg-3 col-md-4 col-sm-6" id="product">
-        <div class="card" >
-        <img
-            src=${item.imageUrl}
-            class="card-img-top"
-            alt="${item.name}"
-            height="200px"
-            background="fill"
-        />
-        <div class="card-body">
-            <div class="text-center">
-            <h5 class="card-title" id="item-name">${item.name}</h5>
-            <h6 id="item-brand">${item.brand}</h6>
+          <div class="card" >
+            <img
+                src=${item.imageUrl}
+                class="card-img-top"
+                alt="${item.name}"
+                height="200px"
+                background="fill"
+            />
+            <div class="card-body">
+                <div class="text-center">
+                  <h5 class="card-title" id="item-name">${item.name}</h5>
+                  <h6 id="item-brand">${item.brand}</h6>
+                </div>
+                <p class="card-text" id="item-desc">${item.description}</p>
+                <h6 class="text-center" id="item-price">$${item.price}</h6>
+                <a href="#" class="btn btn-primary w-100" id=${item._id} onclick="deleteProduct(event);">Delete</a>
+                <a href="detail.html?id=${item._id}" class="btn btn-secondary w-100">Details</a>
             </div>
-            <p class="card-text" id="item-desc">
-            ${item.description}
-            </p>
-            <h6 class="text-center" id="item-price">$${item.price}</h6>
-            <a href="#" class="btn btn-primary w-100" onclick="deleteProduct();">Delete</a>
-            <a href="detail.html?id=${item._id}" class="btn btn-secondary w-100">Details</a>
-            </div>
-        </div>    
+          </div>    
         </div>    `;
         products.appendChild(product);
-        console.log(products);
       });
     } else {
       products.innerHTML = "<h1>No products were added to page</h1>";
     }
   } catch (error) {
     console.log(error);
-    console.log("this is written 3rd, printed 3rd?");
   }
 }
+/*---------------POST ---------------------*/
 
 async function postData(event) {
   event.preventDefault();
@@ -103,17 +98,212 @@ async function postData(event) {
     }
   } catch (error) {
     console.log(error);
-    console.log("this is written 3rd, printed 3rd?");
   }
 
   alert(`${item.name} Has been successfully submitted`);
   displayProducts();
+}
 
-  // function emptyFormAfterSubmit() {
-  //   Object.keys(item).forEach(function (key) {
-  //     delete object[key];
-  //   });
-  // }
+/*---------------Show Details ---------------------*/
+
+async function getProductDetails() {
+  try {
+    const response = await fetch(url + id, {
+      headers,
+    });
+    const product = await response.json();
+    // console.log(product);
+    // console.log(Object.keys(product));
+    Object.keys(product).forEach((key) => {
+      const field = document.querySelector(`#${key}`);
+      if (field) field.value = product[key];
+    });
+    {
+      displayDetailsDiv.innerHTML = `
+      <div class ="container">
+      <div class="card" >
+        <img
+            src=${product.imageUrl}
+            class="card-img-top"
+            alt="${product.name}"
+            height="400px"
+            background="fill"
+        />
+        <div class="card-body">
+            <div class="text-center">
+              <h5 class="card-title" id="item-name">${product.name}</h5>
+              <h6 id="item-brand">${product.brand}</h6>
+            </div>
+            <p class="card-text" id="item-desc">${product.description}</p>
+            <h6 class="text-center" id="item-price">$${product.price}</h6>
+            <a href="#" class="btn btn-primary w-100" onclick="deleteProduct();">Delete</a>
+        </div>
+
+        <div
+        class="modal"
+        id="updateModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">
+                Add New Product
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+               onclick="displayProducts()""
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form onsubmit="postData(event)">
+                <!-- product-name -->
+                <div class="form-group row">
+                  <label for="product-name" class="col-sm-2 col-form-label"
+                    >Product Name</label
+                  >
+                  <div class="col-sm-10">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="product-name"
+                      placeholder="required"
+                      minlength="3"
+                      value="Test 1"
+                      required
+                    />
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="product-brand" class="col-sm-2 col-form-label"
+                    >Product Brand</label
+                  >
+                  <div class="col-sm-10">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="product-brand"
+                      placeholder="required"
+                      minlength="2"
+                      value="Carne"
+                      required
+                    />
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+                </div>
+                <!-- price -->
+                <div class="form-group row">
+                  <label for="product-price" class="col-sm-2 col-form-label"
+                    >Price</label
+                  >
+                  <div class="col-sm-10">
+                    <input
+                      step="10"
+                      type="number"
+                      min="0"
+                      class="form-control"
+                      id="product-price"
+                      placeholder="$"
+                      value="100"
+                      required
+                    />
+                  </div>
+                </div>
+                <!-- desc -->
+                <div class="form-group row">
+                  <label for="product-img" class="col-sm-2 col-form-label"
+                    >Img Url</label
+                  >
+                  <div class="col-sm-10">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="product-img"
+                      placeholder="required"
+                      minlength="3"
+                      value="https://picsum.photos/200/300"
+                      
+                    />
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="product-desc" class="form-label">Description</label>
+                  <textarea
+                    type="textarea"
+                    class="form-control"
+                    id="product-desc"
+                    value="Required example textarea"
+                    minlength="10"
+                    maxlength="150"
+                    required
+                  ></textarea>
+                  <div id="char" class="float-right">0</div>
+                  <div class="invalid-feedback">
+                    Please enter a description with minimun of 10 characters.
+                  </div>
+                </div>
+                <!-- tabs for images -->
+       
+                <!-- tabs desc end -->
+                <!-- final checkbox -->
+                <div class="form-group row">
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="gridCheck1"
+                      />
+                      <label class="form-check-label" for="gridCheck1"
+                        >Is everything correct?</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-danger" onclick="">Update</button>
+                <!-- <button type="reset" class="btn btn-danger">Delete Form</button> -->
+                <button type="reset" class="btn btn-danger">Clear Form</button>
+                <button type="submit" class="btn btn-success">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+`;
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+/*Delete Item*/
+
+async function deleteProduct(event) {
+  try {
+    let url = event ? `${endpoint}/${event.currentTarget.id}` : endpoint;
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers,
+    });
+
+    if (!response.ok) throw new Error("Something went wrong");
+
+    alert("Event deleted successfully");
+    location.assign("index.html");
+  } catch (error) {
+    console.log(error);
+    alert(error.message);
+  }
 }
 
 // change textarea count
@@ -132,111 +322,19 @@ async function postData(event) {
 //   }
 // });
 
-// (function () {
-//   "use strict";
-//   window.addEventListener(
-//     "load",
-//     function () {
-//       // Fetch all the forms we want to apply custom Bootstrap validation styles to
-//       var forms = document.getElementsByClassName("needs-validation");
-//       // Loop over them and prevent submission
-//       var validation = Array.prototype.filter.call(forms, function (form) {
-//         form.addEventListener(
-//           "submit",
-//           function (event) {
-//             if (form.checkValidity() === false) {
-//               event.preventDefault();
-//               event.stopPropagation();
-//             }
-//             form.classList.add("was-validated");
-//           },
-//           false
-//         );
-//       });
-//     },
-//     false
-//   );
-// })();
-
-function handleLoad(e) {
-  console.log("Loaded import: " + e.target.href);
-}
-function handleError(e) {
-  console.log("Error loading import: " + e.target.href);
-}
-
-//   productBrand.value = "";
-//   productDesc.value = "";
-//   productImg.value = "";
-//   productName.value = "";
-//   productPrice.value = "";
-//   console.log("Form CLeared");
-// function clearForm() {
-//   let tags = document.getElementsByTagName("input");
-//   for (let i = 0; i < tags.length; i++) {
-//     switch (tags[i].type) {
-//       case "password":
-//       case "text":
-//         tags[i].value = "";
-//         break;
-//       case "checkbox":
-//       case "radio":
-//         tags[i].checked = false;
-//         break;
-//     }
-//   }
+// function handleLoad(e) {
+//   console.log("Loaded import: " + e.target.href);
 // }
+// function handleError(e) {
+//   console.log("Error loading import: " + e.target.href);
+// }
+
 /// -------------------------------------New stuff m3d9
-// const params =new URLSearchParams(location.search)
-// const id = params.get("id")
-// const endpoint = "url"
 
-// window.onload = async => {
-
-//   document.querySelector("id").innerHTML += "" + id
-//   const response = await fetch(endpoint +id)
-//   const event = await response.json()
-//   console.log(event);
-
-// }
-
-// load dynamicly html element with template and link , not iframe as iframe is heavy
-// let link = document.createElement('link');
-//     link.rel = 'import';
-//     link.href = 'modal.html';
-//     link.setAttribute('async', '');
-//     link.onload = function(e) {...};
-//     link.onerror = function(e) {...};
-//     document.body.appendChild(link);
-
-// async function deleteProduct() {
-
-//   try {
-//     const response = await fetch(endpoint, {
-//       method: "DELETE",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization:
-//         BearerToken      },
-//     });
-
-//     if (!response.ok) throw new Error("Something went wrong");
-
-//     alert("Event deleted successfully");
-//     location.assign("index.html");
-//   } catch (error) {
-//     console.log(error);
-//     alert(error.message);
-//   }
-
-//   // setLoading(false);
-// }
-
-// function setLoading(loading) {
-//   if (loading) {
-//     document.querySelector("#spinner").classList.remove("d-none");
-//   } else {
-//     document.querySelector("#spinner").classList.add("d-none");
-//   }
-// }
-window.onload = () => displayProducts();
+function setLoading(loading) {
+  if (loading) {
+    document.querySelector("#spinner").classList.remove("d-none");
+  } else {
+    document.querySelector("#spinner").classList.add("d-none");
+  }
+}

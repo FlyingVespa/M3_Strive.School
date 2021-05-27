@@ -22,9 +22,11 @@
 
   <body>
     <!-- NAVBAR START -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar scroll</a>
+        <a class="navbar-brand" href="#"
+          ><img src="./img/amazon.png" style="height: 35px" alt="" srcset=""
+        /></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -52,102 +54,34 @@
                 >Details</a
               >
             </li>
-            <!-- <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarScrollingDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Link
-              </a>
-              <ul
-                class="dropdown-menu"
-                aria-labelledby="navbarScrollingDropdown"
-              >
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link disabled"
-                href="#"
-                tabindex="-1"
-                aria-disabled="true"
-                >Link</a
-              >
-            </li> -->
           </ul>
-          <!-- <form class="d-flex">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form> -->
         </div>
         <button
           type="button"
           class="btn btn-warning float-right"
           data-toggle="modal"
-          data-target="#exampleModalCenter"
+          data-target="#updateModal"
         >
-          ADMIN ACCESS
+          Update Item
         </button>
       </div>
     </nav>
-    <!-- NAV END -->
+
+    <!-- spinner end -->
+    <div class="jumbotron"><h2>Details</h2></div>
+
     <!-- MODAL START -->
 
     <!-- MODAL END -->
-    <!-- Products START -->
-    <div class="container">
-      <!-- spinner -->
-      <div class="d-flex justify-content-center">
-        <div class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
-      <!-- spinner end -->
-      <h1>DETAILS</h1>
-      <div class="products" id="products">
-        <div class="row" id="product"></div>
-      </div>
-    </div>
+
+    <div class="display-details"></div>
   </body>
   <script src="./js/main.js"></script>
-  <script src="./js/modal.js"></script>
   <script>
-    // endpoint = "https://striveschool-api.herokuapp.com/api/product/";
-
-    // window.onload = async () => {
-    //   // document.querySelector('h1').innerHTML += " " + id
-
-    //   const response = await fetch(endpoint + id);
-    //   const event = await response.json();
-
-    //   console.log(item);
-    //   displayEvent(item);
-    // };
-
-    // function displayProduct(item) {
-    //   productName.innerHTML = item.name;
-    //   productPrice.innerHTML = item.price;
-    //   productImg.innerHTML = item.IMGurl;
-    //   productBrand.innerHTML = item.brand;
-    //   productDesc.innerHTML = item.description;
-    // }
+    window.onload = () =>
+      displayDetailsDiv.innerHTML == " "
+        ? alert("Nothing selected")
+        : getProductDetails();
   </script>
   <script
     src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
