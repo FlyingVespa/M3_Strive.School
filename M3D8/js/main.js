@@ -270,8 +270,8 @@ async function getProductDetails() {
                     </div>
                   </div>
                 </div>
-                <button type="button" class="btn btn-danger" onclick="">Update</button>
-                <!-- <button type="reset" class="btn btn-danger">Delete Form</button> -->
+             
+
                 <button type="reset" class="btn btn-danger">Clear Form</button>
                 <button type="submit" class="btn btn-success" onclick="updateProduct()">Submit</button>
               </form>
@@ -340,13 +340,7 @@ function setLoading(loading) {
   }
 }
 
-async function updateProduct(event) {
-  event.preventDefault();
-  const response = await fetch(endpoint, {
-    method: "PUT",
-    headers,
-    body: JSON.stringify({ olditem }),
-  });
+async function updateProduct() {
   let olditem = {
     name: productName.value,
     brand: productBrand.value,
@@ -354,6 +348,11 @@ async function updateProduct(event) {
     description: productDesc.value,
     imageUrl: productImg.value,
   };
+  const response = await fetch(endpoint, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({ olditem }),
+  });
   console.log(item);
   try {
     if (response.ok) {
