@@ -71,7 +71,7 @@ async function displayProducts() {
 
 async function postData(event) {
   event.preventDefault();
-  const item = {
+  let item = {
     name: productName.value,
     brand: productBrand.value,
     price: productPrice.value,
@@ -273,7 +273,7 @@ async function getProductDetails() {
                 <button type="button" class="btn btn-danger" onclick="">Update</button>
                 <!-- <button type="reset" class="btn btn-danger">Delete Form</button> -->
                 <button type="reset" class="btn btn-danger">Clear Form</button>
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success" onclick="updateProduct()">Submit</button>
               </form>
             </div>
           </div>
@@ -299,6 +299,7 @@ async function deleteProduct(event) {
     if (!response.ok) throw new Error("Something went wrong");
 
     alert("Event deleted successfully");
+    displayProducts();
     location.assign("index.html");
   } catch (error) {
     console.log(error);
@@ -337,4 +338,32 @@ function setLoading(loading) {
   } else {
     document.querySelector("#spinner").classList.add("d-none");
   }
+}
+
+async function updateProduct(event) {
+  event.preventDefault();
+  const response = await fetch(endpoint, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({ olditem }),
+  });
+  let olditem = {
+    name: productName.value,
+    brand: productBrand.value,
+    price: productPrice.value,
+    description: productDesc.value,
+    imageUrl: productImg.value,
+  };
+  console.log(item);
+  try {
+    if (response.ok) {
+      alert("hunky dory");
+    } else {
+      console.log("something went wrong");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  alert(`${olditem.name} Has been successfully updated`);
 }
