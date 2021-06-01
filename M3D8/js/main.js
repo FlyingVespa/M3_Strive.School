@@ -139,7 +139,20 @@ async function getProductDetails() {
             <a href="#" class="btn btn-primary w-100" onclick="deleteProduct();">Delete</a>
         </div>
 
-        <div
+        `;
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+}
+const modalUpdate = document.querySelector(
+  "body > nav > div > button.btn.btn-warning.float-right"
+);
+
+modalUpdate.addEventListener("click", () => updateMode());
+function updateMode() {
+  displayDetailsDiv.innerHTML += `
+  <div
         class="modal"
         id="updateModal"
         tabindex="-1"
@@ -177,7 +190,7 @@ async function getProductDetails() {
                       id="product-name"
                       placeholder="required"
                       minlength="3"
-                      value="Test 1"
+                      value="To Update"
                       required
                     />
                     <div class="valid-feedback">Looks good!</div>
@@ -194,7 +207,7 @@ async function getProductDetails() {
                       id="product-brand"
                       placeholder="required"
                       minlength="2"
-                      value="Carne"
+                      value="To Update"
                       required
                     />
                     <div class="valid-feedback">Looks good!</div>
@@ -243,8 +256,7 @@ async function getProductDetails() {
                     class="form-control"
                     id="product-desc"
                     value="Required example textarea"
-                    minlength="10"
-                    maxlength="150"
+                                    
                     required
                   ></textarea>
                   <div id="char" class="float-right">0</div>
@@ -280,10 +292,6 @@ async function getProductDetails() {
         </div>
       </div>
 `;
-    }
-  } catch (error) {
-    alert(error.message);
-  }
 }
 
 /*Delete Item*/
